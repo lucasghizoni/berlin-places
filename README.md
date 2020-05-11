@@ -1,0 +1,1 @@
+A Project made mainly to learn Elm language and basic concepts.
