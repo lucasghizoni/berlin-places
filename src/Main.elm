@@ -59,7 +59,7 @@ view : Model -> Html msg
 view model =
     div
         [ style "background-image"
-            "linear-gradient(to right bottom, rgba(126, 213, 111, 0.7), rgba(40, 180, 131, 0.7)), url(/assets/wallandsoldiers.jpg)"
+            "linear-gradient(to right bottom, rgba(126, 213, 111, 0.7), rgba(40, 180, 131, 0.7)), url(assets/wallandsoldiers.jpg)"
         , style "background-size" "cover"
         , style "background-position" "bottom"
         , style "height" "100vh"
