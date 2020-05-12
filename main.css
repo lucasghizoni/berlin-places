@@ -27,10 +27,6 @@
   }
 }
 
-.btn:focus:not(:active)::after {
-  animation: ripple 1s ease-out;
-}
-
 .btn:link,
 .btn:visited {
   position: relative;
@@ -41,6 +37,10 @@
   display: inline-block;
   border-radius: 100px;
   margin: 0 15px;
+}
+
+.btn:focus:not(:active)::after {
+  animation: ripple 1s ease-out;
 }
 
 .btn-white {
