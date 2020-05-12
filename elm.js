@@ -5192,7 +5192,7 @@ var $author$project$Main$view = function (model) {
 			[
 				A2($elm$html$Html$Attributes$style, 'background-image', 'linear-gradient(to right bottom, rgba(126, 213, 111, 0.7), rgba(40, 180, 131, 0.7)), url(/assets/wallandsoldiers.jpg)'),
 				A2($elm$html$Html$Attributes$style, 'background-size', 'cover'),
-				A2($elm$html$Html$Attributes$style, 'background-position', 'top'),
+				A2($elm$html$Html$Attributes$style, 'background-position', 'bottom'),
 				A2($elm$html$Html$Attributes$style, 'height', '100vh'),
 				A2($elm$html$Html$Attributes$style, 'position', 'relative')
 			]),
