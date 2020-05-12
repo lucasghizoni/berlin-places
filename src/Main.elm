@@ -69,8 +69,10 @@ view model =
                     [ class "textbox-subtitle" ]
                     [ text "Discover the best spots in the city" ]
                 ]
-            , a [ href "#", class "btn btn-white" ] [ text "Great War" ]
-            , a [ href "#", class "btn btn-white" ] [ text "Cold War" ]
+            , div [ class "btn-container" ]
+                [ a [ href "#", class "btn btn-white" ] [ text "Great War" ]
+                , a [ href "#", class "btn btn-white" ] [ text "Cold War" ]
+                ]
             ]
         ]
 

@@ -5246,26 +5246,35 @@ var $author$project$Main$view = function (model) {
 									]))
 							])),
 						A2(
-						$elm$html$Html$a,
+						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$href('#'),
-								$elm$html$Html$Attributes$class('btn btn-white')
+								$elm$html$Html$Attributes$class('btn-container')
 							]),
 						_List_fromArray(
 							[
-								$elm$html$Html$text('Great War')
-							])),
-						A2(
-						$elm$html$Html$a,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$href('#'),
-								$elm$html$Html$Attributes$class('btn btn-white')
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('Cold War')
+								A2(
+								$elm$html$Html$a,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$href('#'),
+										$elm$html$Html$Attributes$class('btn btn-white')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Great War')
+									])),
+								A2(
+								$elm$html$Html$a,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$href('#'),
+										$elm$html$Html$Attributes$class('btn btn-white')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Cold War')
+									]))
 							]))
 					]))
 			]));

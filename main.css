@@ -23,7 +23,6 @@
   transform: translate(-50%, -50%);
   animation-name: lazyopacity;
   animation-duration: 4s;
-  text-align: center;
 }
 
 .textbox-container {
@@ -45,6 +44,10 @@
   font-size: 20px;
   font-weight: 700;
   letter-spacing: 14px;
+}
+
+.btn-container {
+  text-align: center;
 }
 
 .btn:after {
