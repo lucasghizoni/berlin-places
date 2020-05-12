@@ -5197,8 +5197,6 @@ var $elm$html$Html$Attributes$href = function (url) {
 		_VirtualDom_noJavaScriptUri(url));
 };
 var $elm$html$Html$span = _VirtualDom_node('span');
-var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
-var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$Main$view = function (model) {
@@ -5206,11 +5204,7 @@ var $author$project$Main$view = function (model) {
 		$elm$html$Html$div,
 		_List_fromArray(
 			[
-				A2($elm$html$Html$Attributes$style, 'background-image', 'linear-gradient(to right bottom, rgba(126, 213, 111, 0.7), rgba(40, 180, 131, 0.7)), url(assets/wallandsoldiers.jpg)'),
-				A2($elm$html$Html$Attributes$style, 'background-size', 'cover'),
-				A2($elm$html$Html$Attributes$style, 'background-position', 'bottom'),
-				A2($elm$html$Html$Attributes$style, 'height', '100vh'),
-				A2($elm$html$Html$Attributes$style, 'position', 'relative')
+				$elm$html$Html$Attributes$class('main-container')
 			]),
 		_List_fromArray(
 			[
@@ -5218,13 +5212,7 @@ var $author$project$Main$view = function (model) {
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						A2($elm$html$Html$Attributes$style, 'position', 'absolute'),
-						A2($elm$html$Html$Attributes$style, 'top', '30%'),
-						A2($elm$html$Html$Attributes$style, 'left', '50%'),
-						A2($elm$html$Html$Attributes$style, 'transform', 'translate(-50%, -50%)'),
-						A2($elm$html$Html$Attributes$style, 'animation-name', 'lazyopacity'),
-						A2($elm$html$Html$Attributes$style, 'animation-duration', '4s'),
-						A2($elm$html$Html$Attributes$style, 'text-align', 'center')
+						$elm$html$Html$Attributes$class('textbox')
 					]),
 				_List_fromArray(
 					[
@@ -5232,10 +5220,7 @@ var $author$project$Main$view = function (model) {
 						$elm$html$Html$h1,
 						_List_fromArray(
 							[
-								A2($elm$html$Html$Attributes$style, 'color', '#fff'),
-								A2($elm$html$Html$Attributes$style, 'text-transform', 'uppercase'),
-								A2($elm$html$Html$Attributes$style, 'width', 'max-content'),
-								A2($elm$html$Html$Attributes$style, 'margin-bottom', '70px')
+								$elm$html$Html$Attributes$class('textbox-container')
 							]),
 						_List_fromArray(
 							[
@@ -5243,10 +5228,7 @@ var $author$project$Main$view = function (model) {
 								$elm$html$Html$span,
 								_List_fromArray(
 									[
-										A2($elm$html$Html$Attributes$style, 'display', 'block'),
-										A2($elm$html$Html$Attributes$style, 'font-size', '60px'),
-										A2($elm$html$Html$Attributes$style, 'font-weight', '400'),
-										A2($elm$html$Html$Attributes$style, 'letter-spacing', '35px')
+										$elm$html$Html$Attributes$class('textbox-title')
 									]),
 								_List_fromArray(
 									[
@@ -5256,10 +5238,7 @@ var $author$project$Main$view = function (model) {
 								$elm$html$Html$span,
 								_List_fromArray(
 									[
-										A2($elm$html$Html$Attributes$style, 'display', 'block'),
-										A2($elm$html$Html$Attributes$style, 'font-size', '20px'),
-										A2($elm$html$Html$Attributes$style, 'font-weight', '700'),
-										A2($elm$html$Html$Attributes$style, 'letter-spacing', '14px')
+										$elm$html$Html$Attributes$class('textbox-subtitle')
 									]),
 								_List_fromArray(
 									[

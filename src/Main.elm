@@ -58,41 +58,15 @@ update msg model =
 view : Model -> Html msg
 view model =
     div
-        [ style "background-image"
-            "linear-gradient(to right bottom, rgba(126, 213, 111, 0.7), rgba(40, 180, 131, 0.7)), url(assets/wallandsoldiers.jpg)"
-        , style "background-size" "cover"
-        , style "background-position" "bottom"
-        , style "height" "100vh"
-        , style "position" "relative"
-        ]
-        [ div
-            [ style "position" "absolute"
-            , style "top" "30%"
-            , style "left" "50%"
-            , style "transform" "translate(-50%, -50%)"
-            , style "animation-name" "lazyopacity"
-            , style "animation-duration" "4s"
-            , style "text-align" "center"
-            ]
+        [ class "main-container" ]
+        [ div [ class "textbox" ]
             [ h1
-                [ style "color" "#fff"
-                , style "text-transform" "uppercase"
-                , style "width" "max-content"
-                , style "margin-bottom" "70px"
-                ]
+                [ class "textbox-container" ]
                 [ span
-                    [ style "display" "block"
-                    , style "font-size" "60px"
-                    , style "font-weight" "400"
-                    , style "letter-spacing" "35px"
-                    ]
+                    [ class "textbox-title" ]
                     [ text "Berlin places" ]
                 , span
-                    [ style "display" "block"
-                    , style "font-size" "20px"
-                    , style "font-weight" "700"
-                    , style "letter-spacing" "14px"
-                    ]
+                    [ class "textbox-subtitle" ]
                     [ text "Discover the best spots in the city" ]
                 ]
             , a [ href "#", class "btn btn-white" ] [ text "Great War" ]

@@ -1,3 +1,52 @@
+.main-container {
+  background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.7), rgba(40, 180, 131, 0.7)), url(assets/wallandsoldiers.jpg);
+  background-size: cover;
+  background-position: bottom;
+  height: 100vh;
+  position: relative;
+}
+
+@keyframes lazyopacity {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.textbox {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation-name: lazyopacity;
+  animation-duration: 4s;
+  text-align: center;
+}
+
+.textbox-container {
+  color: #fff;
+  text-transform: uppercase;
+  width: max-content;
+  margin-bottom: 70px;
+}
+
+.textbox-title {
+  display: block;
+  font-size: 60px;
+  font-weight: 400;
+  letter-spacing: 35px;
+}
+
+.textbox-subtitle {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 14px;
+}
+
 .btn:after {
   content: '';
   position: absolute;
@@ -10,21 +59,6 @@
   border-radius: 100%;
   transform: scale(1, 1) translate(-50%);
   transform-origin: 50% 50%;
-}
-
-@keyframes ripple {
-  0% {
-    transform: scale(0, 0);
-    opacity: 1;
-  }
-  20% {
-    transform: scale(25, 25);
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    transform: scale(40, 40);
-  }
 }
 
 .btn:link,
@@ -48,12 +82,17 @@
   color: #777;
 }
 
-@keyframes lazyopacity {
+@keyframes ripple {
   0% {
-    opacity: 0;
-  }
-
-  100% {
+    transform: scale(0, 0);
     opacity: 1;
+  }
+  20% {
+    transform: scale(25, 25);
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(40, 40);
   }
 }
