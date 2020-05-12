@@ -2,7 +2,7 @@ module Main exposing (..)
 
 import Browser
 import Html exposing (Html, a, div, h1, li, span, text)
-import Html.Attributes exposing (style)
+import Html.Attributes exposing (class, href, style)
 
 
 
@@ -71,12 +71,14 @@ view model =
             , style "left" "50%"
             , style "transform" "translate(-50%, -50%)"
             , style "animation-name" "lazyopacity"
-            , style "animation-duration" "5s"
+            , style "animation-duration" "4s"
+            , style "text-align" "center"
             ]
             [ h1
                 [ style "color" "#fff"
                 , style "text-transform" "uppercase"
                 , style "width" "max-content"
+                , style "margin-bottom" "70px"
                 ]
                 [ span
                     [ style "display" "block"
@@ -93,7 +95,8 @@ view model =
                     ]
                     [ text "Discover the best spots in the city" ]
                 ]
-            , a [] []
+            , a [ href "#", class "btn btn-white" ] [ text "Great War" ]
+            , a [ href "#", class "btn btn-white" ] [ text "Cold War" ]
             ]
         ]
 

@@ -5179,8 +5179,23 @@ var $author$project$Main$update = F2(
 		}
 	});
 var $elm$html$Html$a = _VirtualDom_node('a');
+var $elm$json$Json$Encode$string = _Json_wrap;
+var $elm$html$Html$Attributes$stringProperty = F2(
+	function (key, string) {
+		return A2(
+			_VirtualDom_property,
+			key,
+			$elm$json$Json$Encode$string(string));
+	});
+var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
 var $elm$html$Html$div = _VirtualDom_node('div');
 var $elm$html$Html$h1 = _VirtualDom_node('h1');
+var $elm$html$Html$Attributes$href = function (url) {
+	return A2(
+		$elm$html$Html$Attributes$stringProperty,
+		'href',
+		_VirtualDom_noJavaScriptUri(url));
+};
 var $elm$html$Html$span = _VirtualDom_node('span');
 var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
 var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
@@ -5208,7 +5223,8 @@ var $author$project$Main$view = function (model) {
 						A2($elm$html$Html$Attributes$style, 'left', '50%'),
 						A2($elm$html$Html$Attributes$style, 'transform', 'translate(-50%, -50%)'),
 						A2($elm$html$Html$Attributes$style, 'animation-name', 'lazyopacity'),
-						A2($elm$html$Html$Attributes$style, 'animation-duration', '5s')
+						A2($elm$html$Html$Attributes$style, 'animation-duration', '4s'),
+						A2($elm$html$Html$Attributes$style, 'text-align', 'center')
 					]),
 				_List_fromArray(
 					[
@@ -5218,7 +5234,8 @@ var $author$project$Main$view = function (model) {
 							[
 								A2($elm$html$Html$Attributes$style, 'color', '#fff'),
 								A2($elm$html$Html$Attributes$style, 'text-transform', 'uppercase'),
-								A2($elm$html$Html$Attributes$style, 'width', 'max-content')
+								A2($elm$html$Html$Attributes$style, 'width', 'max-content'),
+								A2($elm$html$Html$Attributes$style, 'margin-bottom', '70px')
 							]),
 						_List_fromArray(
 							[
@@ -5249,7 +5266,28 @@ var $author$project$Main$view = function (model) {
 										$elm$html$Html$text('Discover the best spots in the city')
 									]))
 							])),
-						A2($elm$html$Html$a, _List_Nil, _List_Nil)
+						A2(
+						$elm$html$Html$a,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$href('#'),
+								$elm$html$Html$Attributes$class('btn btn-white')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Great War')
+							])),
+						A2(
+						$elm$html$Html$a,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$href('#'),
+								$elm$html$Html$Attributes$class('btn btn-white')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Cold War')
+							]))
 					]))
 			]));
 };
