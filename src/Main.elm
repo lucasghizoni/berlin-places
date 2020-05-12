@@ -1,7 +1,7 @@
 module Main exposing (..)
 
 import Browser
-import Html exposing (Html, div, h1, li, span, text)
+import Html exposing (Html, a, div, h1, li, span, text)
 import Html.Attributes exposing (style)
 
 
@@ -70,6 +70,8 @@ view model =
             , style "top" "30%"
             , style "left" "50%"
             , style "transform" "translate(-50%, -50%)"
+            , style "animation-name" "lazyopacity"
+            , style "animation-duration" "5s"
             ]
             [ h1
                 [ style "color" "#fff"
@@ -91,6 +93,7 @@ view model =
                     ]
                     [ text "Discover the best spots in the city" ]
                 ]
+            , a [] []
             ]
         ]
 

@@ -5178,6 +5178,7 @@ var $author$project$Main$update = F2(
 			return model;
 		}
 	});
+var $elm$html$Html$a = _VirtualDom_node('a');
 var $elm$html$Html$div = _VirtualDom_node('div');
 var $elm$html$Html$h1 = _VirtualDom_node('h1');
 var $elm$html$Html$span = _VirtualDom_node('span');
@@ -5205,7 +5206,9 @@ var $author$project$Main$view = function (model) {
 						A2($elm$html$Html$Attributes$style, 'position', 'absolute'),
 						A2($elm$html$Html$Attributes$style, 'top', '30%'),
 						A2($elm$html$Html$Attributes$style, 'left', '50%'),
-						A2($elm$html$Html$Attributes$style, 'transform', 'translate(-50%, -50%)')
+						A2($elm$html$Html$Attributes$style, 'transform', 'translate(-50%, -50%)'),
+						A2($elm$html$Html$Attributes$style, 'animation-name', 'lazyopacity'),
+						A2($elm$html$Html$Attributes$style, 'animation-duration', '5s')
 					]),
 				_List_fromArray(
 					[
@@ -5245,7 +5248,8 @@ var $author$project$Main$view = function (model) {
 									[
 										$elm$html$Html$text('Discover the best spots in the city')
 									]))
-							]))
+							])),
+						A2($elm$html$Html$a, _List_Nil, _List_Nil)
 					]))
 			]));
 };
