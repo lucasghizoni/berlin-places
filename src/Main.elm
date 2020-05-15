@@ -1,35 +1,37 @@
-module Main exposing (..)
+module Main exposing (Model, Msg(..), init, main, subscriptions, update, view, viewLinkBtn)
 
 import Browser
-import Html exposing (Html, a, div, h1, li, span, text)
-import Html.Attributes exposing (class, href, style)
+import Browser.Navigation as Nav
+import Html exposing (..)
+import Html.Attributes exposing (..)
+import Url
 
 
-
---
-
-
+main : Program () Model Msg
 main =
-    Browser.sandbox { init = init, update = update, view = view }
+    Browser.application
+        { init = init
+        , view = view
+        , update = update
+        , subscriptions = subscriptions
+        , onUrlChange = UrlChanged
+        , onUrlRequest = LinkClicked
+        }
 
 
 
 -- MODEL
 
 
-type alias Item =
-    { title : String }
-
-
 type alias Model =
-    List Item
+    { key : Nav.Key
+    , url : Url.Url
+    }
 
 
-init : Model
-init =
-    [ { title = "Teste" }
-    , { title = "Teste2" }
-    ]
+init : () -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
+init flags url key =
+    ( Model key url, Cmd.none )
 
 
 
@@ -37,29 +39,65 @@ init =
 
 
 type Msg
-    = Increment
-    | Decrement
+    = LinkClicked Browser.UrlRequest
+    | UrlChanged Url.Url
 
 
-update : Msg -> Model -> Model
+update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        Increment ->
-            model
+        LinkClicked urlRequest ->
+            case urlRequest of
+                Browser.Internal url ->
+                    ( model, Nav.pushUrl model.key (Url.toString url) )
 
-        Decrement ->
-            model
+                Browser.External href ->
+                    ( model, Nav.load href )
+
+        UrlChanged url ->
+            ( { model | url = url }
+            , Cmd.none
+            )
+
+
+
+-- SUBSCRIPTIONS
+
+
+subscriptions : Model -> Sub Msg
+subscriptions _ =
+    Sub.none
 
 
 
 -- VIEW
 
 
-view : Model -> Html msg
+view : Model -> Browser.Document Msg
 view model =
+    { title = "Berlin Places"
+    , body =
+        [ case model.url.query of
+            Nothing ->
+                viewHome
+
+            Just query ->
+                viewResult query
+        ]
+    }
+
+
+viewResult : String -> Html Msg
+viewResult query =
+    text query
+
+
+viewHome : Html Msg
+viewHome =
     div
         [ class "main-container" ]
-        [ div [ class "textbox" ]
+        [ div
+            [ class "textbox" ]
             [ h1
                 [ class "textbox-container" ]
                 [ span
@@ -69,14 +107,15 @@ view model =
                     [ class "textbox-subtitle" ]
                     [ text "Discover the best spots in the city" ]
                 ]
-            , div [ class "btn-container" ]
-                [ a [ href "#", class "btn btn-white" ] [ text "Great War" ]
-                , a [ href "#", class "btn btn-white" ] [ text "Cold War" ]
+            , div
+                [ class "btn-container" ]
+                [ viewLinkBtn "greatwar" "Great war"
+                , viewLinkBtn "coldwar" "Cold war"
                 ]
             ]
         ]
 
 
-viewItem : Item -> Html msg
-viewItem item =
-    li [] [ text item.title ]
+viewLinkBtn : String -> String -> Html Msg
+viewLinkBtn path label =
+    a [ href ("?" ++ path), class "btn btn-white" ] [ text label ]
