@@ -5240,8 +5240,6 @@ var $author$project$Main$update = F2(
 				$elm$core$Platform$Cmd$none);
 		}
 	});
-var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
-var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
@@ -5254,6 +5252,8 @@ var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('
 var $elm$html$Html$div = _VirtualDom_node('div');
 var $elm$html$Html$h1 = _VirtualDom_node('h1');
 var $elm$html$Html$span = _VirtualDom_node('span');
+var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
+var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $elm$html$Html$a = _VirtualDom_node('a');
 var $elm$html$Html$Attributes$href = function (url) {
 	return A2(
@@ -5267,7 +5267,7 @@ var $author$project$Main$viewLinkBtn = F2(
 			$elm$html$Html$a,
 			_List_fromArray(
 				[
-					$elm$html$Html$Attributes$href(path),
+					$elm$html$Html$Attributes$href('?' + path),
 					$elm$html$Html$Attributes$class('btn btn-white')
 				]),
 			_List_fromArray(
@@ -5277,62 +5277,119 @@ var $author$project$Main$viewLinkBtn = F2(
 	});
 var $author$project$Main$viewHome = A2(
 	$elm$html$Html$div,
-	_List_fromArray(
-		[
-			$elm$html$Html$Attributes$class('main-container')
-		]),
+	_List_Nil,
 	_List_fromArray(
 		[
 			A2(
 			$elm$html$Html$div,
 			_List_fromArray(
 				[
-					$elm$html$Html$Attributes$class('textbox')
+					$elm$html$Html$Attributes$class('main-container')
 				]),
 			_List_fromArray(
 				[
 					A2(
-					$elm$html$Html$h1,
-					_List_fromArray(
-						[
-							$elm$html$Html$Attributes$class('textbox-container')
-						]),
-					_List_fromArray(
-						[
-							A2(
-							$elm$html$Html$span,
-							_List_fromArray(
-								[
-									$elm$html$Html$Attributes$class('textbox-title')
-								]),
-							_List_fromArray(
-								[
-									$elm$html$Html$text('Berlin places')
-								])),
-							A2(
-							$elm$html$Html$span,
-							_List_fromArray(
-								[
-									$elm$html$Html$Attributes$class('textbox-subtitle')
-								]),
-							_List_fromArray(
-								[
-									$elm$html$Html$text('Discover the best spots in the city')
-								]))
-						])),
-					A2(
 					$elm$html$Html$div,
 					_List_fromArray(
 						[
-							$elm$html$Html$Attributes$class('btn-container')
+							$elm$html$Html$Attributes$class('textbox')
 						]),
 					_List_fromArray(
 						[
-							A2($author$project$Main$viewLinkBtn, '?greatwar', 'Great war'),
-							A2($author$project$Main$viewLinkBtn, '?coldwar', 'Cold war')
+							A2(
+							$elm$html$Html$h1,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$class('textbox-container')
+								]),
+							_List_fromArray(
+								[
+									A2(
+									$elm$html$Html$span,
+									_List_fromArray(
+										[
+											$elm$html$Html$Attributes$class('textbox-title')
+										]),
+									_List_fromArray(
+										[
+											$elm$html$Html$text('Berlin places')
+										])),
+									A2(
+									$elm$html$Html$span,
+									_List_fromArray(
+										[
+											$elm$html$Html$Attributes$class('textbox-subtitle')
+										]),
+									_List_fromArray(
+										[
+											$elm$html$Html$text('Discover the best spots in the city')
+										]))
+								])),
+							A2(
+							$elm$html$Html$div,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$class('btn-container')
+								]),
+							_List_fromArray(
+								[
+									A2($author$project$Main$viewLinkBtn, 'greatwar', 'Great war'),
+									A2($author$project$Main$viewLinkBtn, 'coldwar', 'Cold war')
+								]))
 						]))
 				]))
 		]));
+var $author$project$Main$viewResult = function (query) {
+	return A2(
+		$elm$html$Html$div,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$class('Items-container')
+			]),
+		_List_fromArray(
+			[
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('Item')
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text('ressadsdads')
+					])),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('Item')
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text('ressadsdads')
+					])),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('Item')
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text('ressadsdads')
+					])),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('Item')
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text('ressadsdads asduashd das sad as asd asd asdas das d sad sad ')
+					]))
+			]));
+};
 var $author$project$Main$view = function (model) {
 	return {
 		body: _List_fromArray(
@@ -5343,7 +5400,7 @@ var $author$project$Main$view = function (model) {
 					return $author$project$Main$viewHome;
 				} else {
 					var query = _v0.a;
-					return $elm$html$Html$text(query);
+					return $author$project$Main$viewResult(query);
 				}
 			}()
 			]),

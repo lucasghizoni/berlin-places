@@ -89,28 +89,43 @@ view model =
 
 viewResult : String -> Html Msg
 viewResult query =
-    text query
+    div [ class "Items-container" ]
+        [ div
+            [ class "Item" ]
+            [ text "ressadsdads" ]
+        , div
+            [ class "Item" ]
+            [ text "ressadsdads" ]
+        , div
+            [ class "Item" ]
+            [ text "ressadsdads" ]
+        , div
+            [ class "Item" ]
+            [ text "ressadsdads asduashd das sad as asd asd asdas das d sad sad " ]
+        ]
 
 
 viewHome : Html Msg
 viewHome =
-    div
-        [ class "main-container" ]
+    div []
         [ div
-            [ class "textbox" ]
-            [ h1
-                [ class "textbox-container" ]
-                [ span
-                    [ class "textbox-title" ]
-                    [ text "Berlin places" ]
-                , span
-                    [ class "textbox-subtitle" ]
-                    [ text "Discover the best spots in the city" ]
-                ]
-            , div
-                [ class "btn-container" ]
-                [ viewLinkBtn "greatwar" "Great war"
-                , viewLinkBtn "coldwar" "Cold war"
+            [ class "main-container" ]
+            [ div
+                [ class "textbox" ]
+                [ h1
+                    [ class "textbox-container" ]
+                    [ span
+                        [ class "textbox-title" ]
+                        [ text "Berlin places" ]
+                    , span
+                        [ class "textbox-subtitle" ]
+                        [ text "Discover the best spots in the city" ]
+                    ]
+                , div
+                    [ class "btn-container" ]
+                    [ viewLinkBtn "greatwar" "Great war"
+                    , viewLinkBtn "coldwar" "Cold war"
+                    ]
                 ]
             ]
         ]
