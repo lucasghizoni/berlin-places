@@ -5261,7 +5261,7 @@ var $elm$html$Html$Attributes$href = function (url) {
 		'href',
 		_VirtualDom_noJavaScriptUri(url));
 };
-var $author$project$Main$viewLinkBtn = F2(
+var $author$project$Page$Home$viewLinkBtn = F2(
 	function (path, label) {
 		return A2(
 			$elm$html$Html$a,
@@ -5275,7 +5275,7 @@ var $author$project$Main$viewLinkBtn = F2(
 					$elm$html$Html$text(label)
 				]));
 	});
-var $author$project$Main$viewHome = A2(
+var $author$project$Page$Home$viewHome = A2(
 	$elm$html$Html$div,
 	_List_Nil,
 	_List_fromArray(
@@ -5333,18 +5333,18 @@ var $author$project$Main$viewHome = A2(
 								]),
 							_List_fromArray(
 								[
-									A2($author$project$Main$viewLinkBtn, 'greatwar', 'Great war'),
-									A2($author$project$Main$viewLinkBtn, 'coldwar', 'Cold war')
+									A2($author$project$Page$Home$viewLinkBtn, 'greatwar', 'Great war'),
+									A2($author$project$Page$Home$viewLinkBtn, 'coldwar', 'Cold war')
 								]))
 						]))
 				]))
 		]));
-var $author$project$Main$viewResult = function (query) {
+var $author$project$Page$Result$viewResultItem = function (item) {
 	return A2(
 		$elm$html$Html$div,
 		_List_fromArray(
 			[
-				$elm$html$Html$Attributes$class('Items-container')
+				$elm$html$Html$Attributes$class('Item')
 			]),
 		_List_fromArray(
 			[
@@ -5352,42 +5352,56 @@ var $author$project$Main$viewResult = function (query) {
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('Item')
+						$elm$html$Html$Attributes$class('ItemContent-container')
 					]),
 				_List_fromArray(
 					[
-						$elm$html$Html$text('ressadsdads')
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('ItemContent-title')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text(item.title)
+							])),
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('ItemContent-desc')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text(item.description)
+							]))
 					])),
 				A2(
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('Item')
+						$elm$html$Html$Attributes$class('Item-ImgContainer')
 					]),
-				_List_fromArray(
-					[
-						$elm$html$Html$text('ressadsdads')
-					])),
+				_List_Nil)
+			]));
+};
+var $author$project$Page$Result$viewResult = function (model) {
+	return A2(
+		$elm$html$Html$div,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$class('Results-container')
+			]),
+		_List_fromArray(
+			[
 				A2(
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('Item')
+						$elm$html$Html$Attributes$class('Items-container')
 					]),
-				_List_fromArray(
-					[
-						$elm$html$Html$text('ressadsdads')
-					])),
-				A2(
-				$elm$html$Html$div,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('Item')
-					]),
-				_List_fromArray(
-					[
-						$elm$html$Html$text('ressadsdads asduashd das sad as asd asd asdas das d sad sad ')
-					]))
+				A2($elm$core$List$map, $author$project$Page$Result$viewResultItem, model))
 			]));
 };
 var $author$project$Main$view = function (model) {
@@ -5397,10 +5411,15 @@ var $author$project$Main$view = function (model) {
 				function () {
 				var _v0 = model.url.query;
 				if (_v0.$ === 'Nothing') {
-					return $author$project$Main$viewHome;
+					return $author$project$Page$Home$viewHome;
 				} else {
 					var query = _v0.a;
-					return $author$project$Main$viewResult(query);
+					return $author$project$Page$Result$viewResult(
+						_List_fromArray(
+							[
+								{description: 'The Brandenburg Gate in Berlin is an early neoclassical triumphal arch , which on the west edge of the square Pariser Platz in Berlin district of Mitte is. It was built as the end of the central boulevard of the Dorotheenstadt , the boulevard Unter den Linden , in the years from 1789 [1] to 1793 [2] according to the instructions of the Prussian king Friedrich Wilhelm II after designs by Carl Gotthard Langhans . The sculpture of the Quadriga crowning the gateis a work designed by the sculptor Johann Gottfried Schadow . To the west of the Brandenburg Gate are the extensive green areas of the Großer Tiergarten , which are crossed by the Straße des 17. Juni in a straight extension of the street Unter den Linden . The square immediately to the west of the gate is called Platz des 18. März .', title: 'Brandenburg Gate'},
+								{description: 'dsadasdasd sdasd', title: 'teste2'}
+							]));
 				}
 			}()
 			]),

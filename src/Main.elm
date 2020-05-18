@@ -1,9 +1,11 @@
-module Main exposing (Model, Msg(..), init, main, subscriptions, update, view, viewLinkBtn)
+module Main exposing (Model, Msg(..), init, main, subscriptions, update, view)
 
 import Browser
 import Browser.Navigation as Nav
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Page.Home exposing (viewHome)
+import Page.Result exposing (viewResult)
 import Url
 
 
@@ -82,55 +84,13 @@ view model =
                 viewHome
 
             Just query ->
-                viewResult query
+                viewResult
+                    [ { title = "Brandenburg Gate"
+                      , description = "The Brandenburg Gate in Berlin is an early neoclassical triumphal arch , which on the west edge of the square Pariser Platz in Berlin district of Mitte is. It was built as the end of the central boulevard of the Dorotheenstadt , the boulevard Unter den Linden , in the years from 1789 [1] to 1793 [2] according to the instructions of the Prussian king Friedrich Wilhelm II after designs by Carl Gotthard Langhans . The sculpture of the Quadriga crowning the gateis a work designed by the sculptor Johann Gottfried Schadow . To the west of the Brandenburg Gate are the extensive green areas of the Großer Tiergarten , which are crossed by the Straße des 17. Juni in a straight extension of the street Unter den Linden . The square immediately to the west of the gate is called Platz des 18. März ."
+                      }
+                    , { title = "teste2"
+                      , description = "dsadasdasd sdasd"
+                      }
+                    ]
         ]
     }
-
-
-viewResult : String -> Html Msg
-viewResult query =
-    div [ class "Items-container" ]
-        [ div
-            [ class "Item" ]
-            [ text "ressadsdads" ]
-        , div
-            [ class "Item" ]
-            [ text "ressadsdads" ]
-        , div
-            [ class "Item" ]
-            [ text "ressadsdads" ]
-        , div
-            [ class "Item" ]
-            [ text "ressadsdads asduashd das sad as asd asd asdas das d sad sad " ]
-        ]
-
-
-viewHome : Html Msg
-viewHome =
-    div []
-        [ div
-            [ class "main-container" ]
-            [ div
-                [ class "textbox" ]
-                [ h1
-                    [ class "textbox-container" ]
-                    [ span
-                        [ class "textbox-title" ]
-                        [ text "Berlin places" ]
-                    , span
-                        [ class "textbox-subtitle" ]
-                        [ text "Discover the best spots in the city" ]
-                    ]
-                , div
-                    [ class "btn-container" ]
-                    [ viewLinkBtn "greatwar" "Great war"
-                    , viewLinkBtn "coldwar" "Cold war"
-                    ]
-                ]
-            ]
-        ]
-
-
-viewLinkBtn : String -> String -> Html Msg
-viewLinkBtn path label =
-    a [ href ("?" ++ path), class "btn btn-white" ] [ text label ]
