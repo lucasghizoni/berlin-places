@@ -5344,7 +5344,7 @@ var $author$project$Page$Result$viewResultItem = function (item) {
 		$elm$html$Html$div,
 		_List_fromArray(
 			[
-				$elm$html$Html$Attributes$class('Item')
+				$elm$html$Html$Attributes$class('Row')
 			]),
 		_List_fromArray(
 			[
@@ -5352,7 +5352,7 @@ var $author$project$Page$Result$viewResultItem = function (item) {
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('ItemContent-container')
+						$elm$html$Html$Attributes$class('RowContainer')
 					]),
 				_List_fromArray(
 					[
@@ -5360,7 +5360,7 @@ var $author$project$Page$Result$viewResultItem = function (item) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('ItemContent-title')
+								$elm$html$Html$Attributes$class('RowContainer-title')
 							]),
 						_List_fromArray(
 							[
@@ -5370,20 +5370,29 @@ var $author$project$Page$Result$viewResultItem = function (item) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('ItemContent-desc')
+								$elm$html$Html$Attributes$class('RowContainer-content')
 							]),
 						_List_fromArray(
 							[
-								$elm$html$Html$text(item.description)
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('RowContainer-desc')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text(item.description)
+									])),
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('RowContainer-img')
+									]),
+								_List_Nil)
 							]))
-					])),
-				A2(
-				$elm$html$Html$div,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('Item-ImgContainer')
-					]),
-				_List_Nil)
+					]))
 			]));
 };
 var $author$project$Page$Result$viewResult = function (model) {
@@ -5399,7 +5408,7 @@ var $author$project$Page$Result$viewResult = function (model) {
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('Items-container')
+						$elm$html$Html$Attributes$class('Table')
 					]),
 				A2($elm$core$List$map, $author$project$Page$Result$viewResultItem, model))
 			]));

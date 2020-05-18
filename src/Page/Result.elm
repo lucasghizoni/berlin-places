@@ -1,7 +1,7 @@
 module Page.Result exposing (viewResult)
 
-import Html exposing (Html, div, text)
-import Html.Attributes exposing (class)
+import Html exposing (Html, div, img, text)
+import Html.Attributes exposing (class, src)
 
 
 type alias Item =
@@ -17,19 +17,20 @@ type alias ModelResult =
 viewResult : ModelResult -> Html msg
 viewResult model =
     div [ class "Results-container" ]
-        [ div [ class "Items-container" ] (List.map viewResultItem model)
+        [ div [ class "Table" ] (List.map viewResultItem model)
         ]
 
 
 viewResultItem : Item -> Html msg
 viewResultItem item =
     div
-        [ class "Item" ]
-        [ div [ class "ItemContent-container" ]
-            [ div [ class "ItemContent-title" ]
+        [ class "Row" ]
+        [ div [ class "RowContainer" ]
+            [ div [ class "RowContainer-title" ]
                 [ text item.title ]
-            , div [ class "ItemContent-desc" ]
-                [ text item.description ]
+            , div [ class "RowContainer-content" ]
+                [ div [ class "RowContainer-desc" ] [ text item.description ]
+                , div [ class "RowContainer-img" ] []
+                ]
             ]
-        , div [ class "Item-ImgContainer" ] []
         ]
