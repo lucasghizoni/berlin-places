@@ -14,23 +14,7 @@
 
 .Row {
   padding: 20px;
-  height: 200px;
   border-bottom: 1px solid rgba(224, 224, 224, 1);
-  overflow: hidden;
-  position: relative;
-}
-
-.Row:after{
-  content: ' ';
-  display: block;
-  height: 20px;
-  width: 100%;
-  background-color: white;
-  position: absolute;
-  bottom: 0;
-}
-
-.RowContainer {
 }
 
 .RowContainer-content {
@@ -45,15 +29,17 @@
 }
 
 .RowContainer-desc {
-  width: 60%;
+  flex: 2;
+  height: 212px;
+  overflow: hidden;
+  padding-right: 50px;
 }
 
 .RowContainer-img {
-  width: 40%;
+  flex: 1;
   background-image: url(assets/Berlin_Brandenburger_Tor_Abend.jpg);
   background-size: cover;
-  height: 157px;
   background-position: center;
   position: relative;
-  height: 200px;
+  margin: 5px;
 }
