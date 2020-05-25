@@ -4,8 +4,8 @@ import Browser
 import Browser.Navigation as Nav
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Page.Home exposing (viewHome)
-import Page.Result exposing (viewResult)
+import Page.Home as Home
+import Page.Result as Result
 import Url
 
 
@@ -25,15 +25,20 @@ main =
 -- MODEL
 
 
-type alias Model =
+type alias RedirectModel =
     { key : Nav.Key
     , url : Url.Url
     }
 
 
+type Model
+    = Redirect RedirectModel
+    | Result Result.Model
+
+
 init : () -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
 init flags url key =
-    ( Model key url, Cmd.none )
+    ( Redirect { key = key, url = url }, Cmd.none )
 
 
 
@@ -43,23 +48,30 @@ init flags url key =
 type Msg
     = LinkClicked Browser.UrlRequest
     | UrlChanged Url.Url
+    | GotMsgResult Result.Msg
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-    case msg of
-        LinkClicked urlRequest ->
+    case ( msg, model ) of
+        ( LinkClicked urlRequest, Redirect redirect ) ->
             case urlRequest of
                 Browser.Internal url ->
-                    ( model, Nav.pushUrl model.key (Url.toString url) )
+                    ( model, Nav.pushUrl redirect.key (Url.toString url) )
 
                 Browser.External href ->
                     ( model, Nav.load href )
 
-        UrlChanged url ->
-            ( { model | url = url }
+        ( UrlChanged url, Redirect redirect ) ->
+            ( Redirect { key = redirect.key, url = url }
             , Cmd.none
             )
+
+        ( GotMsgResult msgResult, _ ) ->
+            ( model, Cmd.none )
+
+        ( _, _ ) ->
+            ( model, Cmd.none )
 
 
 
@@ -79,18 +91,43 @@ view : Model -> Browser.Document Msg
 view model =
     { title = "Berlin Places"
     , body =
-        [ case model.url.query of
-            Nothing ->
-                viewHome
+        [ Html.map GotMsgResult
+            (Result.view
+                [ { id = 1
+                  , title = "Brandenburg Gate"
+                  , description = "The Brandenburg Gate in Berlin is an early neoclassical triumphal arch , which on the west edge of the square Pariser Platz in Berlin district of Mitte is. It was built as the end of the central boulevard of the Dorotheenstadt , the boulevard Unter den Linden , in the years from 1789 [1] to 1793 [2] according to the instructions of the Prussian king Friedrich Wilhelm II after designs by Carl Gotthard Langhans . The sculpture of the Quadriga crowning the gateis a work designed by the sculptor Johann Gottfried Schadow . To the west of the Brandenburg Gate are the extensive green areas of the Großer Tiergarten , which are crossed by the Straße des 17. Juni in a straight extension of the street Unter den Linden . The square immediately to the west of the gate is called Platz des 18. März ."
+                  , collapsed = False
+                  }
+                , { id = 2
+                  , title = "teste2"
+                  , description = "dsadasdasd sdasd"
+                  , collapsed = False
+                  }
+                ]
+            )
 
-            Just query ->
-                viewResult
-                    [ { title = "Brandenburg Gate"
-                      , description = "The Brandenburg Gate in Berlin is an early neoclassical triumphal arch , which on the west edge of the square Pariser Platz in Berlin district of Mitte is. It was built as the end of the central boulevard of the Dorotheenstadt , the boulevard Unter den Linden , in the years from 1789 [1] to 1793 [2] according to the instructions of the Prussian king Friedrich Wilhelm II after designs by Carl Gotthard Langhans . The sculpture of the Quadriga crowning the gateis a work designed by the sculptor Johann Gottfried Schadow . To the west of the Brandenburg Gate are the extensive green areas of the Großer Tiergarten , which are crossed by the Straße des 17. Juni in a straight extension of the street Unter den Linden . The square immediately to the west of the gate is called Platz des 18. März ."
-                      }
-                    , { title = "teste2"
-                      , description = "dsadasdasd sdasd"
-                      }
-                    ]
+        -- [ case model of
+        --     Redirect redirect ->
+        --         case redirect.url.query of
+        --             Nothing ->
+        --                 div [] []
+        --             -- Home.view
+        --             Just _ ->
+        --                 div [] []
+        -- Result.view
+        --     [ { id = 1
+        --       , title = "Brandenburg Gate"
+        --       , description = "The Brandenburg Gate in Berlin is an early neoclassical triumphal arch , which on the west edge of the square Pariser Platz in Berlin district of Mitte is. It was built as the end of the central boulevard of the Dorotheenstadt , the boulevard Unter den Linden , in the years from 1789 [1] to 1793 [2] according to the instructions of the Prussian king Friedrich Wilhelm II after designs by Carl Gotthard Langhans . The sculpture of the Quadriga crowning the gateis a work designed by the sculptor Johann Gottfried Schadow . To the west of the Brandenburg Gate are the extensive green areas of the Großer Tiergarten , which are crossed by the Straße des 17. Juni in a straight extension of the street Unter den Linden . The square immediately to the west of the gate is called Platz des 18. März ."
+        --       , collapsed = False
+        --       }
+        --     , { id = 2
+        --       , title = "teste2"
+        --       , description = "dsadasdasd sdasd"
+        --       , collapsed = False
+        --       }
+        --     ]
+        -- Result result ->
+        -- List.map (Html.map GotMsgResult)
+        -- Result.view result
         ]
     }

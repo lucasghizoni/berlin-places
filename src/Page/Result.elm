@@ -1,30 +1,57 @@
-module Page.Result exposing (viewResult)
+module Page.Result exposing (Model, Msg, update, view)
 
-import Html exposing (Html, div, iframe, img, text)
+import Html exposing (Html, div, iframe, text)
 import Html.Attributes exposing (class, height, src, width)
+import Html.Events exposing (onClick)
 
 
 type alias Item =
-    { title : String
+    { id : Int
+    , title : String
     , description : String
+    , collapsed : Bool
     }
 
 
-type alias ModelResult =
+type alias Model =
     List Item
 
 
-viewResult : ModelResult -> Html msg
-viewResult model =
+updateItem : List Item -> Int -> Model
+updateItem list id =
+    let
+        collapse item =
+            if id == item.id then
+                { item | collapsed = not item.collapsed }
+
+            else
+                item
+    in
+    List.map collapse list
+
+
+update : Msg -> Model -> ( Model, Cmd Msg )
+update msg model =
+    case msg of
+        Collapse item ->
+            ( updateItem model item.id, Cmd.none )
+
+
+type Msg
+    = Collapse Item
+
+
+view : Model -> Html Msg
+view model =
     div [ class "Results-container" ]
         [ div [ class "Table" ] (List.map viewResultItem model)
         ]
 
 
-viewResultItem : Item -> Html msg
+viewResultItem : Item -> Html Msg
 viewResultItem item =
     div
-        [ class "Row" ]
+        [ onClick (Collapse item), class "Row" ]
         [ div [ class "RowContainer" ]
             [ div [ class "RowContainer-title" ]
                 [ text item.title ]

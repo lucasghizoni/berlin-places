@@ -1,11 +1,11 @@
-module Page.Home exposing (viewHome)
+module Page.Home exposing (view)
 
 import Html exposing (Html, a, div, h1, span, text)
 import Html.Attributes exposing (class, href)
 
 
-viewHome : Html msg
-viewHome =
+view : Html msg
+view =
     div []
         [ div
             [ class "main-container" ]
