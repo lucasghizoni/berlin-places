@@ -25,20 +25,34 @@ main =
 -- MODEL
 
 
-type alias RedirectModel =
+type alias Route =
     { key : Nav.Key
     , url : Url.Url
     }
 
 
-type Model
-    = Redirect RedirectModel
-    | Result Result.Model
+type alias HomeModel =
+    { teste : String }
+
+
+type Page
+    = Home HomeModel
+    | ResultPage Result.Model
+
+
+type alias Model =
+    { route : Route
+    , page : Page
+    }
 
 
 init : () -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
-init flags url key =
-    ( Redirect { key = key, url = url }, Cmd.none )
+init _ url key =
+    ( { route = { key = key, url = url }
+      , page = Home { teste = "TESTE" }
+      }
+    , Cmd.none
+    )
 
 
 
@@ -53,22 +67,38 @@ type Msg
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-    case ( msg, model ) of
-        ( LinkClicked urlRequest, Redirect redirect ) ->
+    case ( msg, model.page ) of
+        ( LinkClicked urlRequest, _ ) ->
             case urlRequest of
                 Browser.Internal url ->
-                    ( model, Nav.pushUrl redirect.key (Url.toString url) )
+                    ( { model
+                        | page =
+                            ResultPage
+                                [ { id = 1
+                                  , title = "Brandenburg Gate"
+                                  , description = "The Brandenburg Gate in Berlin is an early neoclassical triumphal arch , which on the west edge of the square Pariser Platz in Berlin district of Mitte is. It was built as the end of the central boulevard of the Dorotheenstadt , the boulevard Unter den Linden , in the years from 1789 [1] to 1793 [2] according to the instructions of the Prussian king Friedrich Wilhelm II after designs by Carl Gotthard Langhans . The sculpture of the Quadriga crowning the gateis a work designed by the sculptor Johann Gottfried Schadow . To the west of the Brandenburg Gate are the extensive green areas of the Großer Tiergarten , which are crossed by the Straße des 17. Juni in a straight extension of the street Unter den Linden . The square immediately to the west of the gate is called Platz des 18. März ."
+                                  , collapsed = False
+                                  }
+                                , { id = 2
+                                  , title = "teste2"
+                                  , description = "dsadasdasd sdasd"
+                                  , collapsed = False
+                                  }
+                                ]
+                      }
+                    , Nav.pushUrl model.route.key (Url.toString url)
+                    )
 
                 Browser.External href ->
                     ( model, Nav.load href )
 
-        ( UrlChanged url, Redirect redirect ) ->
-            ( Redirect { key = redirect.key, url = url }
+        ( UrlChanged url, _ ) ->
+            ( { model | route = { key = model.route.key, url = url } }
             , Cmd.none
             )
 
-        ( GotMsgResult msgResult, _ ) ->
-            ( model, Cmd.none )
+        ( GotMsgResult msgResult, ResultPage result ) ->
+            ( { model | page = ResultPage (Result.update msgResult result) }, Cmd.none )
 
         ( _, _ ) ->
             ( model, Cmd.none )
@@ -91,43 +121,15 @@ view : Model -> Browser.Document Msg
 view model =
     { title = "Berlin Places"
     , body =
-        [ Html.map GotMsgResult
-            (Result.view
-                [ { id = 1
-                  , title = "Brandenburg Gate"
-                  , description = "The Brandenburg Gate in Berlin is an early neoclassical triumphal arch , which on the west edge of the square Pariser Platz in Berlin district of Mitte is. It was built as the end of the central boulevard of the Dorotheenstadt , the boulevard Unter den Linden , in the years from 1789 [1] to 1793 [2] according to the instructions of the Prussian king Friedrich Wilhelm II after designs by Carl Gotthard Langhans . The sculpture of the Quadriga crowning the gateis a work designed by the sculptor Johann Gottfried Schadow . To the west of the Brandenburg Gate are the extensive green areas of the Großer Tiergarten , which are crossed by the Straße des 17. Juni in a straight extension of the street Unter den Linden . The square immediately to the west of the gate is called Platz des 18. März ."
-                  , collapsed = False
-                  }
-                , { id = 2
-                  , title = "teste2"
-                  , description = "dsadasdasd sdasd"
-                  , collapsed = False
-                  }
-                ]
-            )
+        [ case ( model.route.url.query, model.page ) of
+            ( Nothing, _ ) ->
+                Home.view
 
-        -- [ case model of
-        --     Redirect redirect ->
-        --         case redirect.url.query of
-        --             Nothing ->
-        --                 div [] []
-        --             -- Home.view
-        --             Just _ ->
-        --                 div [] []
-        -- Result.view
-        --     [ { id = 1
-        --       , title = "Brandenburg Gate"
-        --       , description = "The Brandenburg Gate in Berlin is an early neoclassical triumphal arch , which on the west edge of the square Pariser Platz in Berlin district of Mitte is. It was built as the end of the central boulevard of the Dorotheenstadt , the boulevard Unter den Linden , in the years from 1789 [1] to 1793 [2] according to the instructions of the Prussian king Friedrich Wilhelm II after designs by Carl Gotthard Langhans . The sculpture of the Quadriga crowning the gateis a work designed by the sculptor Johann Gottfried Schadow . To the west of the Brandenburg Gate are the extensive green areas of the Großer Tiergarten , which are crossed by the Straße des 17. Juni in a straight extension of the street Unter den Linden . The square immediately to the west of the gate is called Platz des 18. März ."
-        --       , collapsed = False
-        --       }
-        --     , { id = 2
-        --       , title = "teste2"
-        --       , description = "dsadasdasd sdasd"
-        --       , collapsed = False
-        --       }
-        --     ]
-        -- Result result ->
-        -- List.map (Html.map GotMsgResult)
-        -- Result.view result
+            ( Just query, ResultPage result ) ->
+                Html.map GotMsgResult
+                    (Result.view result)
+
+            ( _, _ ) ->
+                Home.view
         ]
     }

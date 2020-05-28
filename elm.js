@@ -5150,22 +5150,28 @@ var $elm$core$Task$perform = F2(
 				A2($elm$core$Task$map, toMessage, task)));
 	});
 var $elm$browser$Browser$application = _Browser_application;
-var $author$project$Main$Redirect = function (a) {
-	return {$: 'Redirect', a: a};
+var $author$project$Main$Home = function (a) {
+	return {$: 'Home', a: a};
 };
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$Main$init = F3(
-	function (flags, url, key) {
+	function (_v0, url, key) {
 		return _Utils_Tuple2(
-			$author$project$Main$Redirect(
-				{key: key, url: url}),
+			{
+				page: $author$project$Main$Home(
+					{teste: 'TESTE'}),
+				route: {key: key, url: url}
+			},
 			$elm$core$Platform$Cmd$none);
 	});
 var $elm$core$Platform$Sub$batch = _Platform_batch;
 var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
 var $author$project$Main$subscriptions = function (_v0) {
 	return $elm$core$Platform$Sub$none;
+};
+var $author$project$Main$ResultPage = function (a) {
+	return {$: 'ResultPage', a: a};
 };
 var $elm$browser$Browser$Navigation$load = _Browser_load;
 var $elm$browser$Browser$Navigation$pushUrl = _Browser_pushUrl;
@@ -5213,50 +5219,75 @@ var $elm$url$Url$toString = function (url) {
 					_Utils_ap(http, url.host)),
 				url.path)));
 };
+var $elm$core$Basics$not = _Basics_not;
+var $author$project$Page$Result$updateItem = F2(
+	function (list, id) {
+		var collapse = function (item) {
+			return _Utils_eq(id, item.id) ? _Utils_update(
+				item,
+				{collapsed: !item.collapsed}) : item;
+		};
+		return A2($elm$core$List$map, collapse, list);
+	});
+var $author$project$Page$Result$update = F2(
+	function (msg, model) {
+		var item = msg.a;
+		return A2($author$project$Page$Result$updateItem, model, item.id);
+	});
 var $author$project$Main$update = F2(
 	function (msg, model) {
-		var _v0 = _Utils_Tuple2(msg, model);
-		_v0$3:
-		while (true) {
-			switch (_v0.a.$) {
-				case 'LinkClicked':
-					if (_v0.b.$ === 'Redirect') {
-						var urlRequest = _v0.a.a;
-						var redirect = _v0.b.a;
-						if (urlRequest.$ === 'Internal') {
-							var url = urlRequest.a;
-							return _Utils_Tuple2(
-								model,
-								A2(
-									$elm$browser$Browser$Navigation$pushUrl,
-									redirect.key,
-									$elm$url$Url$toString(url)));
-						} else {
-							var href = urlRequest.a;
-							return _Utils_Tuple2(
-								model,
-								$elm$browser$Browser$Navigation$load(href));
-						}
-					} else {
-						break _v0$3;
-					}
-				case 'UrlChanged':
-					if (_v0.b.$ === 'Redirect') {
-						var url = _v0.a.a;
-						var redirect = _v0.b.a;
-						return _Utils_Tuple2(
-							$author$project$Main$Redirect(
-								{key: redirect.key, url: url}),
-							$elm$core$Platform$Cmd$none);
-					} else {
-						break _v0$3;
-					}
-				default:
+		var _v0 = _Utils_Tuple2(msg, model.page);
+		switch (_v0.a.$) {
+			case 'LinkClicked':
+				var urlRequest = _v0.a.a;
+				if (urlRequest.$ === 'Internal') {
+					var url = urlRequest.a;
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{
+								page: $author$project$Main$ResultPage(
+									_List_fromArray(
+										[
+											{collapsed: false, description: 'The Brandenburg Gate in Berlin is an early neoclassical triumphal arch , which on the west edge of the square Pariser Platz in Berlin district of Mitte is. It was built as the end of the central boulevard of the Dorotheenstadt , the boulevard Unter den Linden , in the years from 1789 [1] to 1793 [2] according to the instructions of the Prussian king Friedrich Wilhelm II after designs by Carl Gotthard Langhans . The sculpture of the Quadriga crowning the gateis a work designed by the sculptor Johann Gottfried Schadow . To the west of the Brandenburg Gate are the extensive green areas of the Großer Tiergarten , which are crossed by the Straße des 17. Juni in a straight extension of the street Unter den Linden . The square immediately to the west of the gate is called Platz des 18. März .', id: 1, title: 'Brandenburg Gate'},
+											{collapsed: false, description: 'dsadasdasd sdasd', id: 2, title: 'teste2'}
+										]))
+							}),
+						A2(
+							$elm$browser$Browser$Navigation$pushUrl,
+							model.route.key,
+							$elm$url$Url$toString(url)));
+				} else {
+					var href = urlRequest.a;
+					return _Utils_Tuple2(
+						model,
+						$elm$browser$Browser$Navigation$load(href));
+				}
+			case 'UrlChanged':
+				var url = _v0.a.a;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{
+							route: {key: model.route.key, url: url}
+						}),
+					$elm$core$Platform$Cmd$none);
+			default:
+				if (_v0.b.$ === 'ResultPage') {
 					var msgResult = _v0.a.a;
+					var result = _v0.b.a;
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{
+								page: $author$project$Main$ResultPage(
+									A2($author$project$Page$Result$update, msgResult, result))
+							}),
+						$elm$core$Platform$Cmd$none);
+				} else {
 					return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
-			}
+				}
 		}
-		return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
 	});
 var $author$project$Main$GotMsgResult = function (a) {
 	return {$: 'GotMsgResult', a: a};
@@ -5273,9 +5304,99 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 	});
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
 var $elm$html$Html$div = _VirtualDom_node('div');
+var $elm$html$Html$h1 = _VirtualDom_node('h1');
+var $elm$html$Html$span = _VirtualDom_node('span');
+var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
+var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
+var $elm$html$Html$a = _VirtualDom_node('a');
+var $elm$html$Html$Attributes$href = function (url) {
+	return A2(
+		$elm$html$Html$Attributes$stringProperty,
+		'href',
+		_VirtualDom_noJavaScriptUri(url));
+};
+var $author$project$Page$Home$viewLinkBtn = F2(
+	function (path, label) {
+		return A2(
+			$elm$html$Html$a,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$href('?' + path),
+					$elm$html$Html$Attributes$class('btn btn-white')
+				]),
+			_List_fromArray(
+				[
+					$elm$html$Html$text(label)
+				]));
+	});
+var $author$project$Page$Home$view = A2(
+	$elm$html$Html$div,
+	_List_Nil,
+	_List_fromArray(
+		[
+			A2(
+			$elm$html$Html$div,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class('main-container')
+				]),
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$div,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('textbox')
+						]),
+					_List_fromArray(
+						[
+							A2(
+							$elm$html$Html$h1,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$class('textbox-container')
+								]),
+							_List_fromArray(
+								[
+									A2(
+									$elm$html$Html$span,
+									_List_fromArray(
+										[
+											$elm$html$Html$Attributes$class('textbox-title')
+										]),
+									_List_fromArray(
+										[
+											$elm$html$Html$text('Berlin places')
+										])),
+									A2(
+									$elm$html$Html$span,
+									_List_fromArray(
+										[
+											$elm$html$Html$Attributes$class('textbox-subtitle')
+										]),
+									_List_fromArray(
+										[
+											$elm$html$Html$text('Discover the best spots in the city')
+										]))
+								])),
+							A2(
+							$elm$html$Html$div,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$class('btn-container')
+								]),
+							_List_fromArray(
+								[
+									A2($author$project$Page$Home$viewLinkBtn, 'greatwar', 'Great war'),
+									A2($author$project$Page$Home$viewLinkBtn, 'coldwar', 'Cold war')
+								]))
+						]))
+				]))
+		]));
 var $author$project$Page$Result$Collapse = function (a) {
 	return {$: 'Collapse', a: a};
 };
+var $elm$html$Html$button = _VirtualDom_node('button');
 var $elm$html$Html$Attributes$height = function (n) {
 	return A2(
 		_VirtualDom_attribute,
@@ -5306,8 +5427,6 @@ var $elm$html$Html$Attributes$src = function (url) {
 		'src',
 		_VirtualDom_noJavaScriptOrHtmlUri(url));
 };
-var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
-var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $elm$html$Html$Attributes$width = function (n) {
 	return A2(
 		_VirtualDom_attribute,
@@ -5319,8 +5438,6 @@ var $author$project$Page$Result$viewResultItem = function (item) {
 		$elm$html$Html$div,
 		_List_fromArray(
 			[
-				$elm$html$Html$Events$onClick(
-				$author$project$Page$Result$Collapse(item)),
 				$elm$html$Html$Attributes$class('Row')
 			]),
 		_List_fromArray(
@@ -5378,7 +5495,20 @@ var $author$project$Page$Result$viewResultItem = function (item) {
 									]),
 								_List_Nil)
 							]))
-					]))
+					])),
+				A2(
+				$elm$html$Html$button,
+				_List_fromArray(
+					[
+						$elm$html$Html$Events$onClick(
+						$author$project$Page$Result$Collapse(item))
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text('TRSTE')
+					])),
+				$elm$html$Html$text(
+				item.collapsed ? 'true' : 'false')
 			]));
 };
 var $author$project$Page$Result$view = function (model) {
@@ -5403,15 +5533,24 @@ var $author$project$Main$view = function (model) {
 	return {
 		body: _List_fromArray(
 			[
-				A2(
-				$elm$html$Html$map,
-				$author$project$Main$GotMsgResult,
-				$author$project$Page$Result$view(
-					_List_fromArray(
-						[
-							{collapsed: false, description: 'The Brandenburg Gate in Berlin is an early neoclassical triumphal arch , which on the west edge of the square Pariser Platz in Berlin district of Mitte is. It was built as the end of the central boulevard of the Dorotheenstadt , the boulevard Unter den Linden , in the years from 1789 [1] to 1793 [2] according to the instructions of the Prussian king Friedrich Wilhelm II after designs by Carl Gotthard Langhans . The sculpture of the Quadriga crowning the gateis a work designed by the sculptor Johann Gottfried Schadow . To the west of the Brandenburg Gate are the extensive green areas of the Großer Tiergarten , which are crossed by the Straße des 17. Juni in a straight extension of the street Unter den Linden . The square immediately to the west of the gate is called Platz des 18. März .', id: 1, title: 'Brandenburg Gate'},
-							{collapsed: false, description: 'dsadasdasd sdasd', id: 2, title: 'teste2'}
-						])))
+				function () {
+				var _v0 = _Utils_Tuple2(model.route.url.query, model.page);
+				if (_v0.a.$ === 'Nothing') {
+					var _v1 = _v0.a;
+					return $author$project$Page$Home$view;
+				} else {
+					if (_v0.b.$ === 'ResultPage') {
+						var query = _v0.a.a;
+						var result = _v0.b.a;
+						return A2(
+							$elm$html$Html$map,
+							$author$project$Main$GotMsgResult,
+							$author$project$Page$Result$view(result));
+					} else {
+						return $author$project$Page$Home$view;
+					}
+				}
+			}()
 			]),
 		title: 'Berlin Places'
 	};

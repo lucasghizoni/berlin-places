@@ -1,6 +1,6 @@
 module Page.Result exposing (Model, Msg, update, view)
 
-import Html exposing (Html, div, iframe, text)
+import Html exposing (Html, button, div, iframe, text)
 import Html.Attributes exposing (class, height, src, width)
 import Html.Events exposing (onClick)
 
@@ -30,11 +30,11 @@ updateItem list id =
     List.map collapse list
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update : Msg -> Model -> Model
 update msg model =
     case msg of
         Collapse item ->
-            ( updateItem model item.id, Cmd.none )
+            updateItem model item.id
 
 
 type Msg
@@ -51,7 +51,7 @@ view model =
 viewResultItem : Item -> Html Msg
 viewResultItem item =
     div
-        [ onClick (Collapse item), class "Row" ]
+        [ class "Row" ]
         [ div [ class "RowContainer" ]
             [ div [ class "RowContainer-title" ]
                 [ text item.title ]
@@ -61,4 +61,12 @@ viewResultItem item =
                 , iframe [ width 300, height 225, src "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d9284.329088458098!2d13.364870575786897!3d52.51444677606197!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x26bbfb4e84674c63!2sPort%C3%A3o%20de%20Brandemburgo!5e0!3m2!1spt-BR!2sde!4v1589905183485!5m2!1spt-BR!2sde" ] []
                 ]
             ]
+        , button [ onClick (Collapse item) ] [ text "TRSTE" ]
+        , text
+            (if item.collapsed == True then
+                "true"
+
+             else
+                "false"
+            )
         ]
