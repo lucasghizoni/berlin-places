@@ -1,0 +1,22 @@
+/* prefix "fl-" means float-grid */
+
+/* hack for fixing problem in layouts with float */
+.fl-row::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.fl-col1-of-3 {
+  float: left;
+  width: calc(33.333% - (2 * 12px));
+}
+
+.fl-col2-of-3 {
+  float: left;
+  width: calc(66.666% - (2 * 12px));
+}
+.fl-col2-of-3:not(:last-child),
+.fl-col1-of-3:not(:last-child) {
+  margin-right: 12px;
+}

@@ -13,7 +13,7 @@ body {
 }
 
 .main-container {
-  background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.7), rgba(40, 180, 131, 0.7)), url(assets/wallandsoldiers.jpg);
+  background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.7), rgba(40, 180, 131, 0.7)), url(../assets/wallandsoldiers.jpg);
   background-size: cover;
   background-position: bottom;
   height: 100vh;

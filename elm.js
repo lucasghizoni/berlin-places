@@ -5393,52 +5393,12 @@ var $author$project$Page$Home$view = A2(
 						]))
 				]))
 		]));
-var $author$project$Page$Result$Collapse = function (a) {
-	return {$: 'Collapse', a: a};
-};
-var $elm$html$Html$button = _VirtualDom_node('button');
-var $elm$html$Html$Attributes$height = function (n) {
-	return A2(
-		_VirtualDom_attribute,
-		'height',
-		$elm$core$String$fromInt(n));
-};
-var $elm$html$Html$iframe = _VirtualDom_node('iframe');
-var $elm$virtual_dom$VirtualDom$Normal = function (a) {
-	return {$: 'Normal', a: a};
-};
-var $elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
-var $elm$html$Html$Events$on = F2(
-	function (event, decoder) {
-		return A2(
-			$elm$virtual_dom$VirtualDom$on,
-			event,
-			$elm$virtual_dom$VirtualDom$Normal(decoder));
-	});
-var $elm$html$Html$Events$onClick = function (msg) {
-	return A2(
-		$elm$html$Html$Events$on,
-		'click',
-		$elm$json$Json$Decode$succeed(msg));
-};
-var $elm$html$Html$Attributes$src = function (url) {
-	return A2(
-		$elm$html$Html$Attributes$stringProperty,
-		'src',
-		_VirtualDom_noJavaScriptOrHtmlUri(url));
-};
-var $elm$html$Html$Attributes$width = function (n) {
-	return A2(
-		_VirtualDom_attribute,
-		'width',
-		$elm$core$String$fromInt(n));
-};
 var $author$project$Page$Result$viewResultItem = function (item) {
 	return A2(
 		$elm$html$Html$div,
 		_List_fromArray(
 			[
-				$elm$html$Html$Attributes$class('Row')
+				$elm$html$Html$Attributes$class('listItem')
 			]),
 		_List_fromArray(
 			[
@@ -5446,7 +5406,17 @@ var $author$project$Page$Result$viewResultItem = function (item) {
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('RowContainer')
+						$elm$html$Html$Attributes$class('listItem-title')
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text(item.title)
+					])),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('fl-row listItem-content')
 					]),
 				_List_fromArray(
 					[
@@ -5454,61 +5424,20 @@ var $author$project$Page$Result$viewResultItem = function (item) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('RowContainer-title')
+								$elm$html$Html$Attributes$class('fl-col2-of-3')
 							]),
 						_List_fromArray(
 							[
-								$elm$html$Html$text(item.title)
+								$elm$html$Html$text(item.description)
 							])),
 						A2(
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('RowContainer-content')
+								$elm$html$Html$Attributes$class('fl-col1-of-3 container-img')
 							]),
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$div,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$class('RowContainer-desc')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text(item.description)
-									])),
-								A2(
-								$elm$html$Html$div,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$class('RowContainer-img')
-									]),
-								_List_Nil),
-								A2(
-								$elm$html$Html$iframe,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$width(300),
-										$elm$html$Html$Attributes$height(225),
-										$elm$html$Html$Attributes$src('https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d9284.329088458098!2d13.364870575786897!3d52.51444677606197!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x26bbfb4e84674c63!2sPort%C3%A3o%20de%20Brandemburgo!5e0!3m2!1spt-BR!2sde!4v1589905183485!5m2!1spt-BR!2sde')
-									]),
-								_List_Nil)
-							]))
-					])),
-				A2(
-				$elm$html$Html$button,
-				_List_fromArray(
-					[
-						$elm$html$Html$Events$onClick(
-						$author$project$Page$Result$Collapse(item))
-					]),
-				_List_fromArray(
-					[
-						$elm$html$Html$text('TRSTE')
-					])),
-				$elm$html$Html$text(
-				item.collapsed ? 'true' : 'false')
+						_List_Nil)
+					]))
 			]));
 };
 var $author$project$Page$Result$view = function (model) {
@@ -5516,7 +5445,7 @@ var $author$project$Page$Result$view = function (model) {
 		$elm$html$Html$div,
 		_List_fromArray(
 			[
-				$elm$html$Html$Attributes$class('Results-container')
+				$elm$html$Html$Attributes$class('result-container')
 			]),
 		_List_fromArray(
 			[
@@ -5524,7 +5453,7 @@ var $author$project$Page$Result$view = function (model) {
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('Table')
+						$elm$html$Html$Attributes$class('list')
 					]),
 				A2($elm$core$List$map, $author$project$Page$Result$viewResultItem, model))
 			]));
